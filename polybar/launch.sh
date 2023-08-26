@@ -1,0 +1,1 @@
+/home/vid/.config/polybar/launch.sh
