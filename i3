@@ -1,0 +1,1 @@
+/home/vid/.config/i3
