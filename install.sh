@@ -77,5 +77,5 @@ loop_dir() {
 exclude_list_root=("config" "readme.md" "install.sh" ".git")
 exclude_list_config=()
 
-loop_dir config "$HOME/.conf" "${exclude_list_config[@]}"
-loop_dir . "$HOME/.gg" "${exclude_list_root[@]}"
+loop_dir config "$HOME/.config/" "${exclude_list_config[@]}"
+loop_dir . "$HOME/" "${exclude_list_root[@]}"
