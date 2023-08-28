@@ -1,6 +1,6 @@
 #!/bin/bash
 
-SCRIPT_DIR=$( cd -- "$( dirname -- "${BASH_SOURCE[0]}" )" &> /dev/null && pwd )
+SCRIPT_DIR=$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")" &>/dev/null && pwd)
 
 cd "$SCRIPT_DIR"
 
@@ -10,11 +10,10 @@ loop_dir() {
     local directory="$2"
     local overwrite_all="false"
 
-
     if [ -n $irectory ]; then
         mkdir -p $directory
         cd "$1"
-    else 
+    else
         exit 0
     fi
 
@@ -33,7 +32,16 @@ loop_dir() {
         fi
     done
 
-    printf "\n\n"
+    printf "\n\nWould you like to pick specific items from the list (y/N): "
+    read list
+    if [ "$list" = "Y" ] || [ "$list" = "y" ]; then
+        printf "\nEnter the item numbers (1 3 4 ...): "
+        read list_input
+        IFS=' ' read -ra list_items <<<"$list_input"
+    fi
+    printf "\n"
+
+    count=1
 
     for file in * .*; do
         # Check if the current entry is in the exclude list
@@ -42,9 +50,13 @@ loop_dir() {
                 printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
                 cp -r "$file" $directory
 
+            elif [ "$overwrite_all" = "noall" ]; then
+                cd "$SCRIPT_DIR" || exit 1
+                break
+
             else
                 if [ -e "${directory}/${file}" ]; then
-                    printf "The file '\e[0;31m$file\e[0m' already exists! Would you like to overwrite it (y/N/all): "
+                    printf "The file '\e[0;31m$file\e[0m' already exists! Would you like to overwrite it (y/N/all/noall): "
                     read overwrite
 
                     if [ "$overwrite" = "Y" ] || [ "$overwrite" = "y" ]; then
@@ -52,11 +64,17 @@ loop_dir() {
                         cp -r "$file" $directory
 
                     elif [ "$overwrite" = "ALL" ] || [ "$overwrite" = "all" ]; then
-                        printf "\n\e[1;31mOverwriting all files!\e[0m\n"
+                        printf "\n\e[1;31mOverwriting\e[0m all files!\n"
                         printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
                         cp -r "$file" $directory
 
                         overwrite_all="true"
+
+                    elif [ "$overwrite" = "NOALL" ] || [ "$overwrite" = "noall" ]; then
+                        printf "\n\e[1;32mOmittiting\e[0m all files!\n"
+
+                        overwrite_all="noall"
+
                     else
                         printf "Skipping '%s'\n" "$file"
                     fi
@@ -77,5 +95,5 @@ loop_dir() {
 exclude_list_root=("config" "readme.md" "install.sh" ".git")
 exclude_list_config=()
 
-loop_dir config "$HOME/.config/" "${exclude_list_config[@]}"
+loop_dir config "$HOME/.config" "${exclude_list_config[@]}"
 loop_dir . "$HOME/" "${exclude_list_root[@]}"
