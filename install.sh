@@ -19,7 +19,7 @@ loop_dir() {
 
     count=1
 
-    printf "Copiying files to: \e[0;34m%s\e[0m \n" "${directory}/${file}"
+    printf "Copiying files to: \e[1;34m%s\e[0m \n" "${directory}/${file}"
 
     for file in * .*; do
         if [[ "$file" != "." && "$file" != ".." && ! " ${exclude_list[@]} " =~ " $file " ]]; then
@@ -46,44 +46,59 @@ loop_dir() {
     for file in * .*; do
         # Check if the current entry is in the exclude list
         if [[ "$file" != "." && "$file" != ".." && ! " ${exclude_list[@]} " =~ " $file " ]]; then
-            if [ "$overwrite_all" = "true" ]; then
-                printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
-                cp -r "$file" $directory
-
-            elif [ "$overwrite_all" = "noall" ]; then
-                cd "$SCRIPT_DIR" || exit 1
-                break
-
-            else
-                if [ -e "${directory}/${file}" ]; then
-                    printf "The file '\e[0;31m$file\e[0m' already exists! Would you like to overwrite it (y/N/all/noall): "
-                    read overwrite
-
-                    if [ "$overwrite" = "Y" ] || [ "$overwrite" = "y" ]; then
-                        printf "Overwriting '\e[0;33m%s\e[0m'\n\n" "$file"
-                        cp -r "$file" $directory
-
-                    elif [ "$overwrite" = "ALL" ] || [ "$overwrite" = "all" ]; then
-                        printf "\n\e[1;31mOverwriting\e[0m all files!\n"
-                        printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
-                        cp -r "$file" $directory
-
-                        overwrite_all="true"
-
-                    elif [ "$overwrite" = "NOALL" ] || [ "$overwrite" = "noall" ]; then
-                        printf "\n\e[1;32mOmittiting\e[0m all files!\n"
-
-                        overwrite_all="noall"
-
-                    else
-                        printf "Skipping '%s'\n" "$file"
+            if [ "$list" = "Y" ] || [ "$list" = "y" ]; then
+                for item in "${list_items[@]}"; do
+                    if [ "$item" = "$count" ]; then
+                        if [ -e "${directory}/${file}" ]; then
+                            printf "\e[0;31mReplacing\e[0m $file \n"
+                        else
+                            printf "\e[0;32mCreating\e[0m $file \n"
+                        fi
+                        #cp -r "$file" $directory
                     fi
-                else
-                    printf "Creating '\e[0;32m%s\e[0m'\n" "$file"
+                done
+            else
+                if [ "$overwrite_all" = "true" ]; then
+                    printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
                     cp -r "$file" $directory
+
+                elif [ "$overwrite_all" = "noall" ]; then
+                    cd "$SCRIPT_DIR" || exit 1
+                    break
+
+                else
+                    if [ -e "${directory}/${file}" ]; then
+                        printf "The file '\e[0;31m$file\e[0m' already exists! Would you like to overwrite it (y/N/all/noall): "
+                        read overwrite
+
+                        if [ "$overwrite" = "Y" ] || [ "$overwrite" = "y" ]; then
+                            printf "Overwriting '\e[0;33m%s\e[0m'\n\n" "$file"
+                            cp -r "$file" $directory
+
+                        elif [ "$overwrite" = "ALL" ] || [ "$overwrite" = "all" ]; then
+                            printf "\n\e[1;31mOverwriting\e[0m all files!\n"
+                            printf "Overwriting '\e[0;33m%s\e[0m'\n" "$file"
+                            cp -r "$file" $directory
+
+                            overwrite_all="true"
+
+                        elif [ "$overwrite" = "NOALL" ] || [ "$overwrite" = "noall" ]; then
+                            printf "\n\e[1;32mOmittiting\e[0m all files!\n"
+
+                            overwrite_all="noall"
+
+                        else
+                            printf "Skipping '%s'\n" "$file"
+                        fi
+                    else
+                        printf "Creating '\e[0;32m%s\e[0m'\n" "$file"
+                        cp -r "$file" $directory
+                    fi
                 fi
             fi
         fi
+        
+        ((count++))
     done
 
     echo
