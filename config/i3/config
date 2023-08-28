@@ -8,6 +8,8 @@
 #
 # Please see https://i3wm.org/docs/userguide.html for a complete reference!
 
+exec --no-startup-id sleep 6 && setxkbmap -layout us,si -option 'grp:alt_shift_toggle'
+
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
