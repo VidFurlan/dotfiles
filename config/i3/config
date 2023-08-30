@@ -207,6 +207,7 @@ exec discord
 exec /usr/bin/split
 
 for_window [class="discord"] move container to workspace $ws9
+for_window [class="spotify"] move container to workspace $ws10
 
 set $bg-color 	         #181825
 set $inactive-bg-color   #181825
