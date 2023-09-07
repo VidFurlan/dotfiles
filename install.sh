@@ -44,7 +44,7 @@ loop_dir() {
                 else
                     printf "\e[0;32mCreating\e[0m $file \n"
                 fi
-                #cp -r "$file" $directory
+                cp -r "$file" $directory
             fi
             ((i_valid_files++))
         fi
