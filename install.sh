@@ -210,5 +210,8 @@ loop_dir    terminal    "$HOME/.config"     "${exclude_list_config[@]}"
 printf "\n-----------------------------\e[1;34m Other \e[0m-----------------------------"
 loop_dir    .           "$HOME/"            "${exclude_list_root[@]}"
 
+printf "\n-----------------------------\e[1;34m Fonts \e[0m-----------------------------"
+loop_dir    fonts       "/usr/share/fonts/" "${exclude_list_config[@]}"
+
 get_pacakge_manager
 install_packages
