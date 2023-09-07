@@ -197,7 +197,7 @@ Made by \e[1;32mVid Furlan\e[0m
 package_list=("i3" "picom" "polybar" "rofi" "terminator")
 
 # Array of filenames and directory names to exclude
-exclude_list_root=("desktop" "terminal" "readme.md" "install.sh" ".git")
+exclude_list_root=("desktop" "terminal" "fonts" "readme.md" "install.sh" ".git")
 exclude_list_config=()
 
 #           From:       To:                 Files to exclude:
@@ -211,4 +211,4 @@ printf "\n-----------------------------\e[1;34m Other \e[0m---------------------
 loop_dir    .           "$HOME/"            "${exclude_list_root[@]}"
 
 printf "\n-----------------------------\e[1;34m Fonts \e[0m-----------------------------"
-loop_dir    fonts       "/usr/share/fonts/" "${exclude_list_config[@]}"
+loop_dir    fonts       "$HOME/.local/share/fonts/" "${exclude_list_config[@]}"
