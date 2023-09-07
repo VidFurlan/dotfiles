@@ -198,7 +198,7 @@ bindsym XF86AudioNext $exec playerctl next
 bindsym XF86AudioPrev $exec playerctl previous
 
 # Set wallpaper
-exec_always feh --bg-scale /home/vid/Images/Wallpapers/CatppuccinMountains.png
+exec_always feh --bg-scale ~/Images/Wallpapers/CatppuccinMountains.png
 
 # Startup
 exec picom -bf
