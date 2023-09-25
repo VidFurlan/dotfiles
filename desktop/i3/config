@@ -43,7 +43,8 @@ floating_modifier $mod
 # tiling_drag modifier titlebar
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec kitty
+# i3-sensible-terminal
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -205,6 +206,7 @@ exec picom -bf
 exec dunst
 exec discord
 exec /usr/bin/split
+exec redshift
 
 for_window [class="discord"] move container to workspace $ws9
 for_window [class="spotify"] move container to workspace $ws10

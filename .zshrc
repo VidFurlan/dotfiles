@@ -21,6 +21,8 @@ bindkey -v
 export KEYTIMEOUT=1
 
 # Use vim keys in tab complete menu:
+bindkey '^[[3~' delete-char
+bindkey -a '^[[3~' delete-char
 bindkey -M menuselect 'h' vi-backward-char
 bindkey -M menuselect 'k' vi-up-line-or-history
 bindkey -M menuselect 'l' vi-forward-char
@@ -53,5 +55,4 @@ source ~/powerlevel10k/powerlevel10k.zsh-theme
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-neofetch
-
+neofetch --ascii ~/.config/neofetch/catart --ascii_colors 2

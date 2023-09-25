@@ -12,7 +12,7 @@ loop_dir() {
     local exclude_list=("${@:2}")
     local directory="$2"
 
-    if [ -n $irectory ]; then
+    if [[ -n $directory ]]; then
         mkdir -p $directory
         cd "$1"
     else
@@ -39,7 +39,7 @@ loop_dir() {
         # Check if the current entry is in the exclude list
         if [[ "$file" != "." && "$file" != ".." && ! "${exclude_list[@]}" =~ "$file" ]]; then
             if [[ "${selected_files[$i_valid_files]}" = "true" ]]; then
-                if [ -e "${directory}/${file}" ]; then
+                if [[ -e "${directory}/${file}" ]]; then
                     printf "\e[0;31mReplacing\e[0m $file \n"
                 else
                     printf "\e[0;32mCreating\e[0m $file \n"
@@ -55,10 +55,9 @@ loop_dir() {
     cd "$SCRIPT_DIR" || exit 1
 }
 
-# Menu from https://unix.stackexchange.com/a/673436/580282
+# Menu implementation from https://unix.stackexchange.com/a/673436/580282
 create_menu() {
     local my_options=("${all_files[@]}")
-
 
     local preselection=()
 
@@ -133,7 +132,7 @@ function multiselect() {
             fi
 
             cursor_to $(($startrow + $idx))
-            if [ $idx -eq $1 ]; then
+            if [[ $idx -eq $1 ]]; then
                 print_active "$option" "$prefix"
             else
                 print_inactive "$option" "$prefix"
@@ -151,9 +150,9 @@ function multiselect() {
             space)  toggle_option $active;;
             enter)  print_options -1; break;;
             up)     ((active--));
-                    if [ $active -lt 0 ]; then active=$((${#options[@]} - 1)); fi;;
+                    if [[ $active -lt 0 ]]; then active=$((${#options[@]} - 1)); fi;;
             down)   ((active++));
-                    if [ $active -ge ${#options[@]} ]; then active=0; fi;;
+                    if [[ $active -ge ${#options[@]} ]]; then active=0; fi;;
         esac
     done
 
@@ -164,24 +163,6 @@ function multiselect() {
 
     eval $return_value='("${selected[@]}")'
 }
-
-# Find os pacakge manager
-function get_pacakge_manager {
-    declare -A osInfo;
-    osInfo[/etc/redhat-release]=yum
-    osInfo[/etc/arch-release]=pacman
-    osInfo[/etc/gentoo-release]=emerge
-    osInfo[/etc/SuSE-release]=zypp
-    osInfo[/etc/debian_version]=apt-get
-    osInfo[/etc/alpine-release]=apk
-}
-
-function install_packages {
-    if [[pacakge_manager = "pacman"]]; then
-        echo $pacakge_manager
-    fi
-}
-
 
 printf " 
 \e[0;32m██████╗  ██████╗ ████████╗███████╗
