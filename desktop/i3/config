@@ -212,12 +212,12 @@ exec redshift
 for_window [class="discord"] move container to workspace $ws9
 for_window [class="spotify"] move container to workspace $ws10
 
-set $bg-color 	         #181825
+set $bg-color 	         #89bfff
 set $inactive-bg-color   #181825
 set $urgent-bg-color     #f38ba8
 
 set $text-color          #cdd6f4
-set $active-text-color   #89b4fa
+set $active-text-color   #89bfff
 set $inactive-text-color #6c7086
 
 set $indicator-color     #89b4fa
@@ -226,30 +226,15 @@ hide_edge_borders both
 
 # window colors
 #                       border              background         text                 indicator
-client.focused          $bg-color           $inactive-bg-color $text-color          $indicator-color
-client.unfocused        $bg-color           $inactive-bg-color $inactive-text-color $indicator-color
-client.focused_inactive $bg-color           $inactive-bg-color $inactive-text-color $indicator-color
+client.focused          $indicator-color    $bg-color          $text-color          $indicator-color
+client.unfocused        $indicator-color    $inactive-bg-color $inactive-text-color $indicator-color
+client.focused_inactive $indicator-color    $inactive-bg-color $inactive-text-color $indicator-color
 client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color
 
 # polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-#bar {
-#  position top
-#  status_command i3blocks -c ~/.config/i3/i3blocks.conf
-
-#	colors {
-#		background $inactive-bg-color
-#	    	separator $active-text-color
-		#                  border             background         text
-#		focused_workspace  $bg-color          $bg-color          $active-text-color
-#    active_workspace   $bg-color          $bg-color          $text-color
-#		inactive_workspace $inactive-bg-color $inactive-bg-color $inactive-text-color
-#		urgent_workspace   $urgent-bg-color   $urgent-bg-color   $text-color
-#	}
-#}
-
-for_window [class="^.*"] border pixel 2
+for_window [class="^.*"] border pixel 0
 gaps inner 10
 gaps outer 0
 smart_gaps off

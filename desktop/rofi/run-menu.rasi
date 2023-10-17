@@ -110,7 +110,7 @@ mode-switcher{
 }
 button {
     padding:                     8px;
-    border-radius:               0px;
+    border-radius:               7px;
     background-color:            @background-alt;
     text-color:                  inherit;
     cursor:                      pointer;
@@ -144,7 +144,7 @@ element {
     enabled:                     true;
     spacing:                     10px;
     padding:                     8px;
-    border-radius:               0px;
+    border-radius:               7px;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
