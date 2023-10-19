@@ -182,6 +182,18 @@ mode "resize" {
         bindsym $mod+r mode "default"
 }
 
+# Resizing by 1
+bindsym $mod+Ctrl+Right resize shrink width 1 px or 1 ppt
+bindsym $mod+Ctrl+Up resize grow height 1 px or 1 ppt
+bindsym $mod+Ctrl+Down resize shrink height 1 px or 1 ppt
+bindsym $mod+Ctrl+Left resize grow width 1 px or 1 ppt
+
+# Resizing by 10
+bindsym $mod+Ctrl+Shift+Right resize shrink width 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Up resize grow height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Down resize shrink height 10 px or 10 ppt
+bindsym $mod+Ctrl+Shift+Left resize grow width 10 px or 10 ppt
+
 bindsym $mod+r mode "resize"
 
 exec --no-startup-id source ~/.fehbg
@@ -208,6 +220,7 @@ exec dunst
 exec discord
 exec /usr/bin/split
 exec redshift
+exec ~/.config/xborder/xborders --border-radius 15 --border-red 137 --border-green 180 --border-blue 250 
 
 for_window [class="discord"] move container to workspace $ws9
 for_window [class="spotify"] move container to workspace $ws10
@@ -234,7 +247,13 @@ client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color      
 # polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
-for_window [class="^.*"] border pixel 0
+# gaps
+for_window [class="^.*"] border pixel 0 
 gaps inner 10
 gaps outer 0
 smart_gaps off
+
+# radius
+smart_borders on
+smart_borders no_gaps
+border_radius 5 
