@@ -199,7 +199,6 @@ bindsym $mod+r mode "resize"
 exec --no-startup-id source ~/.fehbg
 bindsym $mod+shift+x exec betterlockscreen -l dim
 
-
 # Pipewire-pulse
 bindsym XF86AudioMute $exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioLowerVolume $exec pactl set-sink-volume 0 -5%
@@ -257,3 +256,6 @@ smart_gaps off
 smart_borders on
 smart_borders no_gaps
 border_radius 5 
+
+# Flameshot
+bindsym Print exec "flameshot gui"
