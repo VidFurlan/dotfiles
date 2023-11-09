@@ -24,7 +24,7 @@ loop_dir() {
     printf "\nCopying files to: %s\n\n" "${directory}"
 
     for file in * .*; do
-        if [[ "$file" != "." && "$file" != ".." && ! " ${exclude_list[@]} " =~ " $file " ]]; then
+        if [[ "$file" != "." && "$file" != ".*" && "$file" != ".." && ! " ${exclude_list[@]} " =~ " $file " ]]; then
             all_files+=($file)
             ((i++))
         fi
@@ -37,7 +37,7 @@ loop_dir() {
 
     for file in * .*; do
         # Check if the current entry is in the exclude list
-        if [[ "$file" != "." && "$file" != ".." && ! "${exclude_list[@]}" =~ "$file" ]]; then
+        if [[ "$file" != "." && "$file" != ".*" && "$file" != ".." && ! "${exclude_list[@]}" =~ "$file" ]]; then
             if [[ "${selected_files[$i_valid_files]}" = "true" ]]; then
                 if [[ -e "${directory}/${file}" ]]; then
                     printf "\e[0;31mReplacing\e[0m $file \n"
