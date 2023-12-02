@@ -1,9 +1,34 @@
-# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-# Initialization code that may require console input (password prompts, [y/n]
-# confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# Check if zplug is installed
+if [[ ! -d ~/.zplug ]]; then
+  git clone https://github.com/zplug/zplug ~/.zplug
+  source ~/.zplug/init.zsh && zplug update --self
 fi
+
+# Essential
+source ~/.zplug/init.zsh
+
+# Make sure to use double quotes to prevent shell expansion
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "plugins/git", from:oh-my-zsh
+zplug "plugins/sudo", from:oh-my-zsh
+zplug "plugins/command-not-found", from:oh-my-zsh
+zplug "plugins/git-prompt", from:oh-my-zsh
+zplug "zsh-users/zsh-syntax-highlighting"
+zplug "zsh-users/zsh-history-substring-search"
+zplug "zsh-users/zsh-completions"
+zplug "zsh-users/zsh-autosuggestions"
+
+# Install packages that have not been installed yet
+if ! zplug check --verbose; then
+    printf "Install? [y/N]: "
+    if read -q; then
+        echo; zplug install
+    else
+        echo
+    fi
+fi
+
+zplug load
 
 # Tab autocomplete
 autoload -U compinit
@@ -12,8 +37,8 @@ zmodload zsh/complist
 compinit
 
 # History
-HISTSIZE=10000000
-SAVEHIST=10000000
+HISTSIZE=1000
+SAVEHIST=1000
 HISTFILE="$HOME/.local/share/zsh_history"
 
 # vi mode
@@ -47,12 +72,18 @@ preexec() { echo -ne '\e[5 q' ;} # Use beam shape cursor for each new prompt.
 
 source $HOME/.config/shell/aliasrc
 
-source /usr/share/zsh/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
-source /usr/share/zsh/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh 
+autoload -Uz add-zsh-hook vcs_info
+setopt prompt_subst
+add-zsh-hook precmd vcs_info
 
-source ~/powerlevel10k/powerlevel10k.zsh-theme
+zstyle ':vcs_info:*' check-for-changes true
+zstyle ':vcs_info:*' unstagedstr '* '
+zstyle ':vcs_info:*' stagedstr '+ '
+zstyle ':vcs_info:git:*' formats       '󰘬 %b%u %c'
+zstyle ':vcs_info:git:*' actionformats '󰘬 %b|%a%u %c'
+zstyle ':vcs_info:git*' formats "%s  %r/%S %b (%a) %m%u%c"
 
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+PROMPT='%F{green}%n%F{default}@%F{green}%m%f %F{blue}%~% %F{default}%b$(git_super_status) > '
+RPROMPT='%F{green}%*%f'
 
-neofetch --ascii ~/.config/neofetch/catart --ascii_colors 2
+neofetch 

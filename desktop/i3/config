@@ -46,6 +46,7 @@ floating_modifier $mod
 # start a terminal
 bindsym $mod+Return exec kitty
 # i3-sensible-terminal
+bindsym $mod+Shift+Return exec dolphin
 
 # kill focused window
 bindsym $mod+Shift+q kill
@@ -204,58 +205,48 @@ bindsym XF86AudioMute $exec pactl set-sink-mute 0 toggle
 bindsym XF86AudioLowerVolume $exec pactl set-sink-volume 0 -5%
 bindsym XF86AudioRaiseVolume $exec pactl set-sink-volume 0 +5%
 
-# Media player controls
-bindsym XF86AudioPlay $exec playerctl play-pause
-bindsym XF86AudioPause $exec playerctl play-pause
-bindsym XF86AudioNext $exec playerctl next
-bindsym XF86AudioPrev $exec playerctl previous
-
 # Set wallpaper
-exec_always feh --bg-scale ~/Images/Wallpapers/CatppuccinMountains.png
+exec_always feh --bg-center /usr/share/backgrounds/background.jpg
 
 # Startup
 exec picom -bf
 exec dunst
 exec discord
-exec /usr/bin/split
 exec redshift
-exec ~/.config/xborder/xborders --border-radius 15 --border-red 137 --border-green 180 --border-blue 250 
+exec pasystray
+exec nm-applet
+exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 
 for_window [class="discord"] move container to workspace $ws9
 for_window [class="spotify"] move container to workspace $ws10
 
-set $bg-color 	         #89bfff
-set $inactive-bg-color   #181825
-set $urgent-bg-color     #f38ba8
+set $active-color 	        #16181D
+set $base-color             #16181D
+set $urgent-color           #E06C75
 
-set $text-color          #cdd6f4
-set $active-text-color   #89bfff
-set $inactive-text-color #6c7086
+set $text-color             #DCDFE4
+set $active-text-color      #98C379
+set $inactive-text-color    #373c49
 
-set $indicator-color     #89b4fa
+set $indicator-color        #98C379
 
 hide_edge_borders both
 
 # window colors
-#                       border              background         text                 indicator
-client.focused          $indicator-color    $bg-color          $text-color          $indicator-color
-client.unfocused        $indicator-color    $inactive-bg-color $inactive-text-color $indicator-color
-client.focused_inactive $indicator-color    $inactive-bg-color $inactive-text-color $indicator-color
-client.urgent           $urgent-bg-color    $urgent-bg-color   $text-color          $indicator-color
+#                       border              background          text                 indicator
+client.focused          $active-color       $active-color       $text-color          $indicator-color
+client.unfocused        $base-color         $base-color         $inactive-text-color $indicator-color
+client.focused_inactive $base-color         $base-color         $inactive-text-color $indicator-color
+client.urgent           $urgent-color       $urgent-color       $text-color          $indicator-color
 
 # polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # gaps
-for_window [class="^.*"] border pixel 0 
+for_window [class="^.*"] border pixel 3
 gaps inner 10
 gaps outer 0
 smart_gaps off
-
-# radius
-smart_borders on
-smart_borders no_gaps
-border_radius 5 
 
 # Flameshot
 bindsym Print exec "flameshot gui"

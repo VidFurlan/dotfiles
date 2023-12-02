@@ -10,7 +10,7 @@
 /*****----- Configuration -----*****/
 configuration {
 	modi:                       "drun,run,filebrowser,window";
-    show-icons:                 false;
+    show-icons:                 true;
     display-drun:               "";
     display-run:                "";
     display-filebrowser:        "";
@@ -22,12 +22,12 @@ configuration {
 /*****----- Global Properties -----*****/
 * {
     font:                        "JetBrains Mono Nerd Font 10";
-    background:                  #11111b;
-    background-alt:              #1e1e2e;
-    foreground:                  #FFFFFF;
-    selected:                    #89b4fa;
-    active:                      #cba6f7;
-    urgent:                      #f38ba8;
+    background:                  #0B0C0E;
+    background-alt:              #16181D;
+    foreground:                  #DCDFE4;
+    selected:                    #98C379;
+    active:                      #98C379;
+    urgent:                      #E06C75;
 }
 
 /*****----- Main Window -----*****/
@@ -110,7 +110,7 @@ mode-switcher{
 }
 button {
     padding:                     8px;
-    border-radius:               7px;
+    border-radius:               0px;
     background-color:            @background-alt;
     text-color:                  inherit;
     cursor:                      pointer;
@@ -144,7 +144,7 @@ element {
     enabled:                     true;
     spacing:                     10px;
     padding:                     8px;
-    border-radius:               7px;
+    border-radius:               0px;
     background-color:            transparent;
     text-color:                  @foreground;
     cursor:                      pointer;
@@ -176,7 +176,7 @@ element selected.active {
 element-icon {
     background-color:            transparent;
     text-color:                  inherit;
-    size:                        32px;
+    size:                        16px;
     cursor:                      inherit;
 }
 element-text {
