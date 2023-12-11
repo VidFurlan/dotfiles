@@ -220,7 +220,7 @@ exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 for_window [class="discord"] move container to workspace $ws9
 for_window [class="spotify"] move container to workspace $ws10
 
-set $active-color 	        #16181D
+set $active-color 	        #98C379
 set $base-color             #16181D
 set $urgent-color           #E06C75
 
@@ -228,7 +228,7 @@ set $text-color             #DCDFE4
 set $active-text-color      #98C379
 set $inactive-text-color    #373c49
 
-set $indicator-color        #98C379
+set $indicator-color        #16181D
 
 hide_edge_borders both
 
