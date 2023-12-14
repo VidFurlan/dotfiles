@@ -7,19 +7,21 @@ Personal config file repository including config files for the **i3 desktop** an
 Located at the root of the repository it provides the ability to select individual files, or just to apply them all.
 <br/>Structure of files:
     
-    ├─ desktop (files will be copied to .config)
-    |  ├─ dunst
-    |  ├─ i3
-    |  ├─ picom
-    |  ├─ polybar
-    |  └─ rofi
-    ├─ terminal (files will be copied to .config)
-    |  ├─ kitty
-    |  ├─ neofetch
-    |  └─ terminator
-    ├─ fonts (files will be copied to .local/share/fonts/)
-    |  └─ jetbrains
-    └─ .zshrc
+    ├── desktop
+    │   ├── dunst
+    │   ├── i3
+    │   ├── picom
+    │   ├── polybar
+    │   └── rofi
+    ├── fonts
+    │   └── jetbrains
+    ├── install.sh
+    ├── readme.md
+    ├── terminal
+    │   ├── cava
+    │   ├── kitty
+    │   └── neofetch
+    └── wallpapers
 
 #### i3 WM Desktop:
 - [i3 WM](https://i3wm.org/)
@@ -31,6 +33,7 @@ Located at the root of the repository it provides the ability to select individu
 #### Terminal:
 - ZSH
 - [kitty](https://sw.kovidgoyal.net/kitty/)
+- cava
 
 ### Fonts:
 - [Jetbrains Nerd Font](https://www.nerdfonts.com/)
