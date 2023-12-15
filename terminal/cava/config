@@ -175,10 +175,10 @@ data_format = ascii
 # You can define as many as 8 different colors. They range from bottom to top of screen
 gradient = 1
 gradient_count = 4
-gradient_color_1 = '#c6a0f6'
-gradient_color_2 = '#f5bde6'
-gradient_color_3 = '#f0c6c6'
-gradient_color_4 = '#f4dbd6'
+gradient_color_1 = '#A0D57B'
+gradient_color_2 = '#B4DB92'
+gradient_color_3 = '#C8E2AA'
+gradient_color_4 = '#DCE8C1'
 ; gradient_color_5 = '#cca633'
 ; gradient_color_6 = '#cc8033'
 ; gradient_color_7 = '#cc5933'
