@@ -34,11 +34,11 @@ Located at the root of the repository it provides the ability to select individu
 - [Dunst](https://dunst-project.org/)
 
 #### Terminal:
-- ZSH
+- zsh
 - [kitty](https://sw.kovidgoyal.net/kitty/)
-- cava
+- [cava](https://github.com/karlstav/cava)
 
-### Fonts:
+#### Fonts:
 - [Jetbrains Nerd Font](https://www.nerdfonts.com/)
 
 *I use Arch BTW*
