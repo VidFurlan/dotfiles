@@ -232,19 +232,19 @@ set $indicator-color        #16181D
 
 hide_edge_borders both
 
-# window colors
-#                       border              background          text                 indicator
-client.focused          $active-color       $active-color       $text-color          $indicator-color
-client.unfocused        $base-color         $base-color         $inactive-text-color $indicator-color
-client.focused_inactive $base-color         $base-color         $inactive-text-color $indicator-color
-client.urgent           $urgent-color       $urgent-color       $text-color          $indicator-color
-
+# class                 border                  backgr.                 text                    indicator               child_border
+client.focused          $base-color             $base-color             $active-text-color      $active-color           $base-color
+client.focused_inactive $base-color             $base-color             $text-color             $base-color             $base-color
+client.unfocused        $base-color             $base-color             $inactive-text-color    $base-color             $base-color
+client.urgent           $base-color             $urgent-color           $text-color             $base-color             $base-color
+client.placeholder      $base-color             $base-color             $inactive-text-color    $base-color             $base-color
+    
 # polybar
 exec_always --no-startup-id ~/.config/polybar/launch.sh
 
 # gaps
 for_window [class="^.*"] border pixel 3
-gaps inner 10
+gaps inner 8
 gaps outer 0
 smart_gaps off
 

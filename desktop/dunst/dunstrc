@@ -30,7 +30,7 @@
     height = 300
 
     # Position the notification in the top right corner
-    origin = top-right
+    origin = top-center
 
     # Offset from the origin
     offset = 5x30
@@ -250,7 +250,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 0 
+    corner_radius = 12 
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -315,17 +315,17 @@
   timeout = 10
 
   [urgency_low]
-  background = "#0B0C0E"
+  background = "#000000"
   foreground = "#DCDFE4"
 
   [urgency_normal]
-  background = "#0B0C0E"
+  background = "#000000"
   foreground = "#DCDFE4"
 
   [urgency_critical]
-  background = "#0B0C0E"
+  background = "#000000"
   foreground = "#DCDFE4"
-  frame_color = "#E06C75"
+  frame_color = "#c4746e"
   timeout = 0
 
 # Every section that isn't one of the above is interpreted as a rules to
