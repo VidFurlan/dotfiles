@@ -31,8 +31,9 @@ fi
 zplug load
 
 # Tab autocomplete
-autoload -U compinit
+autoload -Uz compinit && compinit
 zstyle ':completion:*' menu select
+zstyle ':completion:*' matcher-list 'm:{a-z}={A-Za-z}'
 zmodload zsh/complist
 compinit
 
