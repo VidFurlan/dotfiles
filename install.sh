@@ -44,6 +44,7 @@ loop_dir() {
                 else
                     printf "\e[0;32mCreating\e[0m $file \n"
                 fi
+                rm -rf $directory/$file
                 cp -r "$file" $directory
             fi
             ((i_valid_files++))
@@ -128,7 +129,7 @@ function multiselect() {
         for option in "${options[@]}"; do
             local prefix="[ ]"
             if [[ ${selected[idx]} == true ]]; then
-              prefix="[\e[0;32m*\e[0m]"
+              prefix="[\e[1;94m*\e[0m]"
             fi
 
             cursor_to $(($startrow + $idx))
@@ -165,13 +166,13 @@ function multiselect() {
 }
 
 printf " 
-\e[0;32m██████╗  ██████╗ ████████╗███████╗
-██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝
-██║  ██║██║   ██║   ██║   ███████╗
-██║  ██║██║   ██║   ██║   ╚════██║
-██████╔╝╚██████╔╝   ██║   ███████║
-╚═════╝  ╚═════╝    ╚═╝   ╚══════╝\e[0m
-Made by \e[1;32mVid Furlan\e[0m
+\e[1;94m██████╗  ██████╗ ████████╗███████╗   
+██╔══██╗██╔═══██╗╚══██╔══╝██╔════╝   
+██║  ██║██║   ██║   ██║   ███████╗   
+██║  ██║██║   ██║   ██║   ╚════██║   
+██████╔╝╚██████╔╝   ██║   ███████║██╗
+╚═════╝  ╚═════╝    ╚═╝   ╚══════╝╚═╝\e[0m
+Made by \e[1;94mVid Furlan\e[0m
 "
 
 # Package list
@@ -181,15 +182,33 @@ package_list=("i3" "picom" "polybar" "rofi" "terminator")
 exclude_list_root=("desktop" "terminal" "fonts" "readme.md" "install.sh" ".git")
 exclude_list_config=()
 
+printf " 
+\e[1;94m
+┏┓┏┓┳┓┏┓┳┏┓┏┓
+┃ ┃┃┃┃┣ ┃┃┓┗┓
+┗┛┗┛┛┗┻ ┻┗┛┗┛
+\e[0m"
 #           From:       To:                 Files to exclude:
-printf "\n----------------------------\e[1;34m Desktop \e[0m----------------------------"
+printf "\n\e[1;94mDesktop \e[0m"
 loop_dir    desktop     "$HOME/.config"     "${exclude_list_config[@]}"
 
-printf "\n---------------------------\e[1;34m Terminal \e[0m----------------------------"
-loop_dir    terminal    "$HOME/.config"     "${exclude_list_config[@]}"
-
-printf "\n-----------------------------\e[1;34m Other \e[0m-----------------------------"
+printf "\n\e[1;94mOther \e[0m"
 loop_dir    .           "$HOME/"            "${exclude_list_root[@]}"
 
-printf "\n-----------------------------\e[1;34m Fonts \e[0m-----------------------------"
+printf "\n\e[1;94mFonts \e[0m"
 loop_dir    fonts       "$HOME/.local/share/fonts/" "${exclude_list_config[@]}"
+
+printf "\n\e[1;94m┏┓┏┓┏┓┓┏┓┏┓┏┓┏┓┏┓
+┃┃┣┫┃ ┃┫ ┣┫┃┓┣ ┗┓
+┣┛┛┗┗┛┛┗┛┛┗┗┛┗┛┗┛
+\e[0m"
+
+printf 'Install needed packages (y/N)? '
+read answer
+
+if [ "$answer" != "${answer#[Yy]}" ] ;then 
+    packages='i3 polybar picom rofi dunst kitty neofetch'
+    if [ -x "$(command -v apt)" ];       then sudo apt update && sudo apt install $packages
+    elif [ -x "$(command -v pacman)" ];  then sudo pacman -Syy && sudo pacman -S $packages --noconfirm
+    else echo "FAILED TO INSTALL PACKAGES: $packagesNeeded">&2; fi
+fi
