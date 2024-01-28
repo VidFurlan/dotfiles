@@ -216,7 +216,7 @@ bindsym XF86AudioLowerVolume $exec pactl set-sink-volume 0 -5%
 bindsym XF86AudioRaiseVolume $exec pactl set-sink-volume 0 +5%
 
 # Set wallpaper
-exec_always feh --bg-center /usr/share/backgrounds/background.jpg
+exec_always feh --bg-fill $HOME/.config/backgrounds/forest.jpg
 
 # Startup
 exec picom -bf
