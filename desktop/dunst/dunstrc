@@ -250,7 +250,7 @@
     # corners.
     # The radius will be automatically lowered if it exceeds half of the
     # notification height to avoid clipping text and/or icons.
-    corner_radius = 12 
+    corner_radius = 0 
 
     # Ignore the dbus closeNotification message.
     # Useful to enforce the timeout set by dunst configuration. Without this
@@ -310,7 +310,7 @@
     per_monitor_dpi = false
 
   [global]
-  frame_color = "#98C379"
+  frame_color = "#87a987"
   separator_color= frame
   timeout = 10
 
