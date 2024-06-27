@@ -224,7 +224,6 @@ exec dunst
 exec discord
 exec redshift
 exec pasystray
-exec nm-applet
 exec --no-startup-id /usr/lib/mate-polkit/polkit-mate-authentication-agent-1
 
 for_window [class="discord"] move container to workspace $ws9
